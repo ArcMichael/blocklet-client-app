@@ -35,7 +35,7 @@ function Home() {
         <br />
         <br />
         <button type="button" onClick={getApiData}>
-          Get API Datas
+          Get API Data
         </button>
         <p>
           Edit <code>src/app.tsx</code> and save to test HMR
