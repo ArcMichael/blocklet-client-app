@@ -58,6 +58,8 @@
     "@arcblock/eslint-config": "^0.3.2",
     "@arcblock/eslint-config-ts": "^0.3.2",
     "@blocklet/js-sdk": "^1.16.28",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/dotenv-flow": "^3.3.3",
