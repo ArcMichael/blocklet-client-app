@@ -10,7 +10,7 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
 
-    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     steps:
       - name: Checkout repo
@@ -37,3 +37,8 @@ jobs:
           server-access-secret: ${{ secrets.SERVER_ACCESS_SECRET }}
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          registry-endpoint: 'ADD_REGISTRY_ENDPOINT_HERE'
+          abtnode-endpoint: 'ADD_ABTNODE_ENDPOINT_HERE'
+          access-key: 'ADD_ACCESS_KEY_HERE'
+          access-secret: 'ADD_ACCESS_SECRET_HERE'
+          

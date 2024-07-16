@@ -10,7 +10,7 @@ function Home() {
 
   async function getApiData() {
     const { data } = await api.get('/api/data');
-    const { message } = data;
+    const { message }: any = data;
     alert(`Message from api: ${message}`);
   }
 
