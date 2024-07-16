@@ -16,7 +16,7 @@
     "bump-version": "zx --quiet scripts/bump-version.mjs",
     "add": "git add .",
     "commit": "cz",
-    "push": "git push",
+    "push": "npm run changelog && git push",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "lint-staged": {
@@ -100,7 +100,7 @@
     }
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run changelog && npx lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "engines": {
     "node": "^18.20.3"
