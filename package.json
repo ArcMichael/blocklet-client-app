@@ -18,7 +18,7 @@
   "lint-staged": {
     "*.{mjs,js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint"
+      "eslint --fix"
     ],
     "*.{css,less,scss,json,graphql}": [
       "prettier --write"
@@ -63,7 +63,9 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "bumpp": "^9.4.1",
+    "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
     "import-sort-style-module": "^6.0.0",
     "lint-staged": "^15.2.7",
@@ -95,5 +97,13 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
+  },
+  "engines": {
+    "node": "^18.20.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
