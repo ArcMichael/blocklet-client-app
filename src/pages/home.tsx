@@ -2,7 +2,7 @@ import { useState } from 'react';
 import reactLogo from '../assets/react.svg';
 import blockletLogo from '../assets/blocklet.svg';
 import viteLogo from '../assets/vite.svg';
-import './home.css';
+// import './home.css';
 import api from '../libs/api';
 
 function Home() {
@@ -11,6 +11,7 @@ function Home() {
   async function getApiData() {
     const { data } = await api.get('/api/data');
     const { message }: any = data;
+    // eslint-disable-next-line no-alert
     alert(`Message from api: ${message}`);
   }
 
