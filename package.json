@@ -17,7 +17,8 @@
     "add": "git add .",
     "commit": "cz",
     "push": "git push",
-    "release": "standard-version && git push origin main && git push origin main --tags"
+    "release": "standard-version && git push origin main && git push origin main --tags",
+    "tree": "tree -l 4 -o tree.txt --ignore node_modules/"
   },
   "lint-staged": {
     "*.{mjs,js,jsx,ts,tsx}": [
@@ -83,6 +84,7 @@
     "rimraf": "^5.0.7",
     "simple-git-hooks": "^2.11.1",
     "standard-version": "^9.5.0",
+    "tree-cli": "^0.6.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2",
     "vite": "^5.3.3",
