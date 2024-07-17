@@ -1,15 +1,13 @@
-// src/Layout/CustomHeader.tsx
-
 import { Layout } from 'antd';
 import UserMenu from '../components/user-menu';
 
 const { Header } = Layout;
 
 interface CustomHeaderProps {
-  showUserMenu?: boolean;
+  showUserMenu: boolean;
 }
 
-function CustomHeader(props: CustomHeaderProps) {
+function CustomHeader({ showUserMenu = true }: CustomHeaderProps) {
   return (
     <Header
       style={{
@@ -20,7 +18,7 @@ function CustomHeader(props: CustomHeaderProps) {
         alignItems: 'center',
       }}>
       <div style={{ flex: 1 }} />
-      {props.showUserMenu && (
+      {showUserMenu && (
         <div style={{ marginRight: '16px' }}>
           <UserMenu />
         </div>
@@ -28,9 +26,5 @@ function CustomHeader(props: CustomHeaderProps) {
     </Header>
   );
 }
-
-CustomHeader.defaultProps = {
-  showUserMenu: true,
-};
 
 export default CustomHeader;
