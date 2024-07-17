@@ -1,4 +1,3 @@
-// src/Layout/WithSimpleLayout.tsx
 import React from 'react';
 import { Layout } from 'antd';
 import CustomHeader from './custom-header';
@@ -9,7 +8,7 @@ function WithSimpleLayout(WrappedComponent: React.FC): React.FC {
   function HOC() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <CustomHeader />
+        <CustomHeader showUserMenu />
         <CustomContent>
           <WrappedComponent />
         </CustomContent>

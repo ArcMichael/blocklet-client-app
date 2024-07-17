@@ -1,10 +1,15 @@
-import { Dropdown, Avatar, MenuProps } from 'antd';
+import { Dropdown, Avatar, MenuProps, message } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 
 function UserMenu() {
   const handleLogout = () => {
     // eslint-disable-next-line no-console
     console.log('Logged out');
+    message.info('Logged out.');
+  };
+
+  const Navigate = () => {
+    message.info('Navigate to Profile Page.');
   };
 
   const menuItems: MenuProps['items'] = [
@@ -12,6 +17,7 @@ function UserMenu() {
       key: 'profile',
       label: 'Profile',
       icon: <UserOutlined />,
+      onClick: Navigate,
     },
     {
       key: 'logout',

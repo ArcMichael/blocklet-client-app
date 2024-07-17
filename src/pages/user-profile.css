@@ -1,0 +1,14 @@
+.profile-row {
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.profile-text {
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+}
+
+.profile-input {
+  width: 100%;
+}

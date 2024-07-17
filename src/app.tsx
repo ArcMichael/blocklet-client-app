@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Home from './pages/home';
-import Profile from './pages/profile';
+import UserProfile from './pages/user-profile';
 
 function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Profile />} />
+        <Route path="/" element={<UserProfile />} />
         <Route path="/home" element={<Home />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -8,7 +8,7 @@ interface CustomContentProps {
   children: ReactNode;
 }
 
-function CustomContent(props: CustomContentProps) {
+function CustomContent({ children = <div /> }: CustomContentProps) {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -23,7 +23,7 @@ function CustomContent(props: CustomContentProps) {
         borderRadius: borderRadiusLG,
       }}>
       {/* {showBreadcrumbs && <Breadcrumbs />} */}
-      {props.children}
+      {children}
     </Content>
   );
 }
