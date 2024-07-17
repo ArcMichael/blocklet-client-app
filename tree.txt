@@ -1,0 +1,68 @@
+/Users/michaelqiu/Documents/workspace/blocklet-client-app
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── api
+|  ├── dev.ts
+|  ├── hooks
+|  |  └── pre-start.js
+|  ├── public
+|  ├── src
+|  |  ├── hooks
+|  |  |  └── pre-start.ts
+|  |  ├── index.ts
+|  |  ├── libs
+|  |  |  ├── auth.ts
+|  |  |  ├── env.ts
+|  |  |  └── logger.ts
+|  |  └── routes
+|  |     └── index.ts
+|  └── third.d.ts
+├── blocklet.md
+├── blocklet.yml
+├── index.html
+├── logo.png
+├── package.json
+├── pnpm-lock.yaml
+├── public
+|  └── resized_image1_240x240.webp
+├── screenshots
+├── scripts
+|  ├── build-clean.mjs
+|  └── bump-version.mjs
+├── src
+|  ├── app.tsx
+|  ├── assets
+|  |  ├── blocklet.svg
+|  |  ├── react.svg
+|  |  └── vite.svg
+|  ├── components
+|  |  └── user-menu.tsx
+|  ├── data
+|  |  └── user-profile-data.ts
+|  ├── env.d.ts
+|  ├── index.css
+|  ├── index.tsx
+|  ├── layout
+|  |  ├── custom-content.tsx
+|  |  ├── custom-footer.tsx
+|  |  ├── custom-header.tsx
+|  |  └── with-simple-layout.tsx
+|  ├── libs
+|  |  └── api.ts
+|  ├── pages
+|  |  ├── home.css
+|  |  ├── home.tsx
+|  |  ├── user-profile.css
+|  |  └── user-profile.tsx
+|  └── types
+|     └── user-profile.ts
+├── tsconfig.api.json
+├── tsconfig.eslint.json
+├── tsconfig.json
+├── version
+└── vite.config.mts
+
+directory: 57 file: 45 symboliclink: 1086
+
+ignored: directory (1)

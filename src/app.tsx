@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
+import { UserProvider } from './contexts/user-context';
 import Home from './pages/home';
 import UserProfile from './pages/user-profile';
 
@@ -20,8 +20,10 @@ export default function WrappedApp() {
   const basename = window?.blocklet?.prefix || '/';
 
   return (
-    <BrowserRouter basename={basename}>
-      <App />
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
   );
 }
