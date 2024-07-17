@@ -1,7 +1,9 @@
 import { Dropdown, Avatar, MenuProps, message } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useUser } from '../contexts/user-context';
 
 function UserMenu() {
+  const { nickname } = useUser();
   const handleLogout = () => {
     // eslint-disable-next-line no-console
     console.log('Logged out');
@@ -39,7 +41,7 @@ function UserMenu() {
             textOverflow: 'ellipsis',
             maxWidth: '200px',
           }}>
-          Username
+          {nickname}
         </span>
       </div>
     </Dropdown>

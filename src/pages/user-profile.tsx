@@ -1,30 +1,40 @@
 /* eslint-disable no-console */
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Card, Col, Row, Avatar, Typography, Button, Input, Space, Form, message } from 'antd';
 import { UserProfile } from '../types/user-profile';
-import userProfileData from '../data/user-profile-data';
 import WithSimpleLayout from '../layout/with-simple-layout';
 import './user-profile.css';
+import { useUser } from '../contexts/user-context';
 
 const { Title, Text } = Typography;
 
 function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
+  const { nickname, setNickname } = useUser();
 
   const handleEditClick = () => {
     if (isEditing) {
       form
         .validateFields()
         .then((values) => {
-          console.log('Received values of form: ', values);
-          // success
-          message.success('Profile updated successfully!');
-          setIsEditing(false);
+          axios
+            .put(`/api/user-profile/${userProfile.id}`, values)
+            .then((response) => {
+              console.log('Profile updated:', response.data);
+              message.success('Profile updated successfully!');
+              setIsEditing(false);
+              setNickname(values.username);
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.error('Error updating profile:', error);
+              message.error('Failed to update profile.');
+            });
         })
         .catch((errorInfo) => {
           console.log('Validate Failed:', errorInfo);
-          // error
         });
     } else {
       setIsEditing(true);
@@ -65,7 +75,7 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
                     <Input className="profile-input" />
                   </Form.Item>
                 ) : (
-                  <Text className="profile-text">{userProfile.username}</Text>
+                  <Text className="profile-text">{nickname}</Text>
                 )}
               </Col>
             </Row>
@@ -156,7 +166,26 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
 }
 
 function UserProfilePage() {
-  return <UserProfileComponent userProfile={userProfileData} />;
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const { setNickname } = useUser();
+
+  useEffect(() => {
+    axios
+      .get('/api/user-profile/1')
+      .then((response) => {
+        setUserProfile(response.data.user);
+        setNickname(response.data.user.username);
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
+  }, [setNickname]);
+
+  if (!userProfile) {
+    return <div>Loading...</div>;
+  }
+
+  return <UserProfileComponent userProfile={userProfile} />;
 }
 
 export default WithSimpleLayout(UserProfilePage);
