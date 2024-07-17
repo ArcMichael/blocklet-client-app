@@ -1,22 +1,22 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 
 interface UserContextProps {
-  nickname: string;
-  setNickname: (nickname: string) => void;
+  username: string;
+  setUsername: (username: string) => void;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [nickname, setNickname] = useState<string>(() => {
-    return sessionStorage.getItem('nickname') || '';
+  const [username, setUsername] = useState<string>(() => {
+    return sessionStorage.getItem('username') || '';
   });
 
   useEffect(() => {
-    sessionStorage.setItem('nickname', nickname);
-  }, [nickname]);
+    sessionStorage.setItem('username', username);
+  }, [username]);
 
-  const value = useMemo(() => ({ nickname, setNickname }), [nickname]);
+  const value = useMemo(() => ({ username, setUsername }), [username]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

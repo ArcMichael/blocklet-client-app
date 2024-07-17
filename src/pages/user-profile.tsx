@@ -12,20 +12,25 @@ const { Title, Text } = Typography;
 function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
-  const { nickname, setNickname } = useUser();
+  const { setUsername } = useUser();
+
+  const handleEditCancel = () => {
+    setIsEditing(false);
+  };
 
   const handleEditClick = () => {
     if (isEditing) {
       form
         .validateFields()
         .then((values) => {
+          const updatedProfile = { ...userProfile, ...values };
           axios
-            .put(`/api/user-profile/${userProfile.id}`, values)
+            .put(`/api/user-profile/${userProfile.id}`, updatedProfile)
             .then((response) => {
               console.log('Profile updated:', response.data);
               message.success('Profile updated successfully!');
               setIsEditing(false);
-              setNickname(values.username);
+              setUsername(updatedProfile.username);
               window.location.reload();
             })
             .catch((error) => {
@@ -48,16 +53,18 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
           <Avatar size={120} src={userProfile.avatar} />
         </Col>
         <Col xs={24} md={18}>
-          <Title level={2}>{userProfile.nickname}</Title>
+          <Title level={2}>User Profile</Title>
           <Form
             form={form}
             initialValues={{
+              avatar: userProfile.avatar,
               username: userProfile.username,
               email: userProfile.email,
               phone: userProfile.phone,
               bio: userProfile.bio,
               country: userProfile.country,
               region: userProfile.region,
+              nickname: userProfile.nickname,
             }}
             layout="vertical">
             <Row className="profile-row">
@@ -75,7 +82,24 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
                     <Input className="profile-input" />
                   </Form.Item>
                 ) : (
-                  <Text className="profile-text">{nickname}</Text>
+                  <Text className="profile-text">{userProfile.username}</Text>
+                )}
+              </Col>
+            </Row>
+            <Row className="profile-row">
+              <Col span={8}>
+                <Text strong>Nickname: </Text>
+              </Col>
+              <Col span={16}>
+                {isEditing ? (
+                  <Form.Item
+                    name="nickname"
+                    rules={[{ required: true, message: 'Please input your nickname!' }]}
+                    style={{ marginBottom: 0 }}>
+                    <Input className="profile-input" />
+                  </Form.Item>
+                ) : (
+                  <Text className="profile-text">{userProfile.nickname}</Text>
                 )}
               </Col>
             </Row>
@@ -155,11 +179,21 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
         </Col>
       </Row>
       <Row style={{ marginTop: '20px' }}>
-        <Col xs={24} style={{ textAlign: 'center' }}>
+        <Col xs={isEditing ? 8 : 24} style={{ textAlign: 'center' }}>
           <Button block type="primary" onClick={handleEditClick}>
             {isEditing ? 'Save' : 'Edit'}
           </Button>
         </Col>
+        <Col xs={8} />
+        {isEditing ? (
+          <Col xs={8} style={{ textAlign: 'center' }}>
+            <Button block danger type="primary" onClick={handleEditCancel}>
+              {isEditing ? 'Cancel' : 'Cancel'}
+            </Button>
+          </Col>
+        ) : (
+          <div />
+        )}
       </Row>
     </Card>
   );
@@ -167,19 +201,19 @@ function UserProfileComponent({ userProfile }: { userProfile: UserProfile }) {
 
 function UserProfilePage() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const { setNickname } = useUser();
+  const { setUsername } = useUser();
 
   useEffect(() => {
     axios
       .get('/api/user-profile/1')
       .then((response) => {
         setUserProfile(response.data.user);
-        setNickname(response.data.user.username);
+        setUsername(response.data.user.nickname);
       })
       .catch((error) => {
         console.error('Error fetching user profile:', error);
       });
-  }, [setNickname]);
+  }, [setUsername]);
 
   if (!userProfile) {
     return <div>Loading...</div>;
